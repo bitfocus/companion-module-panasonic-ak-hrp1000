@@ -1,5 +1,5 @@
 {
-	"extends": "./tsconfig.build.json",
+	"extends": "@companion-module/tools/tsconfig/node22/recommended-esm.json",
 	"include": ["src/**/*.ts"],
 	"exclude": ["node_modules/**"],
 	"compilerOptions": {
