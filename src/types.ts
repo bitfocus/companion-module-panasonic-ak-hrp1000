@@ -1,0 +1,18 @@
+import type { InstanceBase } from '@companion-module/base'
+
+import type { ModuleConfig } from './config.js'
+import type { ActionSchema } from './actions.js'
+import type { FeedbackSchema } from './feedbacks.js'
+import type { VariableSchema } from './variables.js'
+
+export interface PanasonicTypes {
+	config: ModuleConfig
+	secrets: undefined
+	actions: ActionSchema
+	feedbacks: FeedbackSchema
+	variables: VariableSchema
+}
+
+export interface InstanceBaseExt extends InstanceBase<PanasonicTypes> {
+	config: ModuleConfig
+}

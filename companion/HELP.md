@@ -1,3 +1,3 @@
-## Your module
+## Panasonic AK HRP 1000
 
-Write some help for your users here!
+Change camera selection on the AK HRP 1000

@@ -1,4 +1,4 @@
-# companion-module-[replace with module name]
+# companion-module-panasonic-ak-hrp1000
 
 See [HELP.md](./companion/HELP.md) and [LICENSE](./LICENSE)
 
