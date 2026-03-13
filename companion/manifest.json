@@ -2,8 +2,8 @@
 	"$schema": "../node_modules/@companion-module/base/assets/manifest.schema.json",
 	"id": "panasonic-ak-hrp1000",
 	"name": "panasonic-ak-hrp1000",
-	"shortname": "Panasonic AK HRP 1000",
-	"description": "Control the AK HRP 1000 ROP",
+	"shortname": "Panasonic AK-HRP1000",
+	"description": "Control the AK-HRP1000 ROP",
 	"version": "0.0.0",
 	"license": "MIT",
 	"repository": "git+https://github.com/bitfocus/companion-module-panasonic-ak-hrp1000.git",
@@ -21,7 +21,7 @@
 		"entrypoint": "../dist/main.js"
 	},
 	"legacyIds": [],
-	"manufacturer": "AK-HRP1000",
-	"products": ["Panasonic"],
-	"keywords": ["ROP"]
+	"manufacturer": "Panasonic",
+	"products": ["AK-HRP1000", "AK-HRP1005"],
+	"keywords": ["ROP", "Camera"]
 }
