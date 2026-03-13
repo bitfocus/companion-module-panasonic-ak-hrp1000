@@ -21,7 +21,7 @@ export default class ModuleInstance extends InstanceBase<PanasonicTypes> impleme
 		super(internal)
 	}
 
-	async init(config: ModuleConfig): Promise<void> {
+	public async init(config: ModuleConfig): Promise<void> {
 		this.config = config
 		this.createClient()
 
@@ -33,20 +33,20 @@ export default class ModuleInstance extends InstanceBase<PanasonicTypes> impleme
 		this.updateVariableDefinitions() // export variable definitions
 	}
 	// When module gets deleted
-	async destroy(): Promise<void> {
+	public async destroy(): Promise<void> {
 		this.log('debug', `destroy. PID ${process.pid}, ID: ${this.id}. Label: ${this.label}`)
 		this.#queue.clear()
 		this.#controller.abort()
 	}
 
-	async configUpdated(config: ModuleConfig): Promise<void> {
+	public async configUpdated(config: ModuleConfig): Promise<void> {
 		this.config = config
 		this.#queue.clear()
 		this.createClient()
 	}
 
 	// Return config fields for web config
-	getConfigFields(): SomeCompanionConfigField[] {
+	public getConfigFields(): SomeCompanionConfigField[] {
 		return GetConfigFields()
 	}
 
@@ -62,7 +62,7 @@ export default class ModuleInstance extends InstanceBase<PanasonicTypes> impleme
 		UpdatePresets(this)
 	}
 
-	updateVariableDefinitions(): void {
+	private updateVariableDefinitions(): void {
 		UpdateVariableDefinitions(this)
 	}
 
@@ -73,6 +73,8 @@ export default class ModuleInstance extends InstanceBase<PanasonicTypes> impleme
 	public async httpGet(path: string, priority: number = 0): Promise<void> {
 		// We dont want to send a stream of camera selections, so instead of letting a queue build, only let the last message through
 		this.#queue.clear()
+		this.#controller.abort() // cancel any in-flight request
+		this.#controller = new AbortController() // fresh controller for the new one
 		return await this.#queue.add(
 			async ({ signal }) => {
 				if (!this.#axiosClient) throw new Error('Axios Client not initialised')
@@ -81,9 +83,13 @@ export default class ModuleInstance extends InstanceBase<PanasonicTypes> impleme
 					.then((_response: AxiosResponse<any, any>) => {
 						return
 					})
-					.catch((_err) => {
-						// The device always returns a HTTP even when the message works, so we ignore it
-						return
+					.catch((err) => {
+						// We don't want to log if a message was aborted by a new one cancelling the prior
+						if (!signal?.aborted) {
+							// The device always returns a HTTP error even when the command works, so we just log at debug level and continue without worrying about if it actually worked.
+							// Is this UDP over TCP?😁
+							this.log('debug', JSON.stringify(err))
+						}
 					})
 			},
 			{ priority: priority, signal: this.#controller.signal },
