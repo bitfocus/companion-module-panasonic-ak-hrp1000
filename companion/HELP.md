@@ -2,6 +2,8 @@
 
 Change camera selection on the AK-HRP1000/AK-HRP1005.
 
+Note: This module does not poll or maintain an active connection to the unit, and the unit always returns an error even when it successfully recieves and actions a command, thus the module does not report useful status updates.
+
 **Minimum supported firmware:** `4.80-00-0.03`
 
 ### Setup
