@@ -1,6 +1,7 @@
 {
 	"$schema": "../node_modules/@companion-module/base/assets/manifest.schema.json",
 	"id": "panasonic-ak-hrp1000",
+	"type": "connection",
 	"name": "panasonic-ak-hrp1000",
 	"shortname": "Panasonic AK-HRP1000",
 	"description": "Control the AK-HRP1000 ROP",
