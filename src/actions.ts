@@ -33,10 +33,8 @@ export function UpdateActions(self: ModuleInstance): CompanionActionDefinitions<
 			options: [CameraOption],
 			callback: async (event) => {
 				const camera = event.options.camera
-				if (!Number.isInteger(camera) || camera < 1 || camera > 99) {
-					self.log('error', `Invalid camera selection: ${camera} — must be 1-99`)
-					return
-				}
+				if (!Number.isInteger(camera) || camera < 1 || camera > 99)
+					throw new Error(`Invalid camera selection: ${camera}`)
 				await self.httpGet(`aw_cam?cmd=XPT:${camera}&res=1`)
 			},
 		},
