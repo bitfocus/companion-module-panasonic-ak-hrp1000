@@ -24,7 +24,7 @@
 	},
 	"dependencies": {
 		"@companion-module/base": "~2.0.3",
-		"axios": "^1.13.6",
+		"axios": "^1.15.0",
 		"p-queue": "^9.1.0"
 	},
 	"devDependencies": {
