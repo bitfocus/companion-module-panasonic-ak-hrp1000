@@ -3,12 +3,15 @@
 	"include": ["src/**/*.ts"],
 	"exclude": ["node_modules/**", "src/**/*spec.ts", "src/**/__tests__/*", "src/**/__mocks__/*"],
 	"compilerOptions": {
+		"target": "es2025",
+		"lib": ["es2025"],
 		"outDir": "./dist",
-		"baseUrl": "./",
+		"rootDir": "./src",
 		"paths": {
 			"*": ["./node_modules/*"]
 		},
 		"module": "nodenext",
-		"moduleResolution": "nodenext"
+		"moduleResolution": "nodenext",
+		"alwaysStrict": true
 	}
 }
